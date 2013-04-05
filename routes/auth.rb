@@ -18,6 +18,7 @@ class Default::App
 
   get '/login/?' do
     if logged_in?
+      flash[:notice] = "You're already logged in."
       redirect_to_stored
     else
       erb :"auth/login"
@@ -28,9 +29,11 @@ class Default::App
     if !logged_in? && user = User.authenticate(params["username"], params["password"])
       session[:user] = user.id
       session[:ip] = request.ip
+      flash[:success] = "You've successfully logged in as #{user.username}."
 
       redirect_to_stored
     else
+      flash.now[:alert] = "Invalid login credentials provided."
       erb :"auth/login"
     end
   end
@@ -40,6 +43,7 @@ class Default::App
     session[:user] = nil
     session[:ip] = nil
 
+    flash[:notice] = "You've been logged out."
     redirect "/"
   end
 
@@ -67,6 +71,7 @@ class Default::App
     def login_required
       return false if logged_in?
 
+      flash[:alert] = "You need to login before continuing."
       session[:stored_path] = request.fullpath
       redirect "/login"
     end

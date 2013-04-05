@@ -7,6 +7,7 @@ require 'json'
 
 require 'sinatra/base'
 require 'sinatra/namespace'
+require 'rack-flash'
 
 require 'lib/core_ext/hash'
 require 'lib/init_database'
@@ -26,6 +27,7 @@ module Default
       enable :show_exceptions
     end
 
+    use Rack::Flash
     use ScssEngine
 
     register Sinatra::Namespace
