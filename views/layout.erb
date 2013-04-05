@@ -4,19 +4,73 @@
 <head>
 	<meta charset="utf-8" />
   <meta name="viewport" content="width=device-width" />
-  <title>Network Certificate Authority</title>
+  <title>Default Application</title>
 
   <link rel="stylesheet" href="/css/app.css" />
 
   <script src="/js/vendor/custom.modernizr.js"></script>
 </head>
 <body>
-  <div class="row">
-    <div class="small-12 columns">
-      <h1>Default Application</h1>
-    </div>
-  </div>
+  <!-- Header and Nav -->
+  <nav class="top-bar">
+    <ul class="title-area">
+      <!-- Title Area -->
+      <li class="name">
+      <h1><a href="#">Default Application</a></h1>
+      </li>
+      <li class="toggle-topbar menu-icon"><a href="#"><span>menu</span></a></li>
+    </ul>
+
+    <% if current_user %>
+      <section class="top-bar-section">
+      <!-- Right Nav Section -->
+      <ul class="right">
+        <li class="divider"></li>
+        <li class="has-dropdown">
+        <a href="#">Main Item 1</a>
+        <ul class="dropdown">
+          <li><label>Section Name</label></li>
+          <li class="has-dropdown">
+          <a href="#" class="">Has Dropdown, Level 1</a>
+          <ul class="dropdown">
+            <li><a href="#">Dropdown Options</a></li>
+            <li><a href="#">Dropdown Options</a></li>
+            <li><a href="#">Level 2</a></li>
+            <li><a href="#">Subdropdown Option</a></li>
+            <li><a href="#">Subdropdown Option</a></li>
+            <li><a href="#">Subdropdown Option</a></li>
+          </ul>
+          </li>
+          <li><a href="#">Dropdown Option</a></li>
+          <li><a href="#">Dropdown Option</a></li>
+          <li class="divider"></li>
+          <li><label>Section Name</label></li>
+          <li><a href="#">Dropdown Option</a></li>
+          <li><a href="#">Dropdown Option</a></li>
+          <li><a href="#">Dropdown Option</a></li>
+          <li class="divider"></li>
+          <li><a href="#">See all &rarr;</a></li>
+        </ul>
+        </li>
+        <li class="divider"></li>
+        <li><a href="#">Main Item 2</a></li>
+        <li class="divider"></li>
+        <li class="has-dropdown">
+        <a href="#">Account (<%= current_user.username %>)</a>
+        <ul class="dropdown">
+          <li><a href="#">Edit Account</a></li>
+          <li><a href="/logout">Logout</a></li>
+          <li class="divider"></li>
+          <li><a href="#">See all Users &raquo;</a></li>
+        </ul>
+        </li>
+      </ul>
+      </section>
+    <% end %>
+  </nav>
+  <!-- End Header and nav -->
   
+  <!-- Begin Flash Notices -->
   <% if flash[:alert] %>
     <div class="row">
       <div class="small-12 columns">
@@ -24,7 +78,6 @@
       </div>
     </div>
   <% end %>
-
   <% if flash[:notice] %>
     <div class="row">
       <div class="small-12 columns">
@@ -32,7 +85,6 @@
       </div>
     </div>
   <% end %>
-
   <% if flash[:success] %>
     <div class="row">
       <div class="small-12 columns">
@@ -40,13 +92,26 @@
       </div>
     </div>
   <% end %>
+  <!-- End Flash Notices -->
   
   <%= yield %>
 
   <footer class="row">
     <div class="small-12 columns">
       <hr />
-      <p>&copy; 2013 Sam Stelfox. All Rights Reserved.</p>
+      <div class="row">
+        <div class="large-6 columns">
+          <p>&copy; 2013 Sam Stelfox. All Rights Reserved.</p>
+        </div>
+        <div class="large-6 columns">
+          <ul class="inline-list right">
+            <li><a href="#">Link 1</a></li>
+            <li><a href="#">Link 2</a></li>
+            <li><a href="#">Link 3</a></li>
+            <li><a href="#">Link 4</a></li>
+          </ul>
+        </div>
+      </div>
     </div>
   </footer>
 
