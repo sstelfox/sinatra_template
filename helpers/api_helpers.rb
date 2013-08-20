@@ -16,7 +16,11 @@ module ApiResponseHelper
       time_start = Time.now
 
       begin
-        data = data.deep_merge(yield)
+        new_data, new_response_code, new_errors = yield
+
+        data.deep_merge!(new_data)
+        errors = errors + Array(new_errors)
+        response_code = new_response_code || response_code
       rescue Exception => e
         logger.error("Error occurred #{e.inspect}")
         response_code = 500
