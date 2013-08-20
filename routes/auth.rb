@@ -107,16 +107,16 @@ class Default::App
     # @param [String] path
     # @return [Boolean]
     def routeable_path?(path)
-      rl = self.class.routes.each_with_object(Hash.new([])) do |verb, route_listing|
-        verb[1].each do |route|
-          route_listing[verb[0]] += [route[0].source]
+      valid_routes = self.class.routes.map do |verb, entries|
+        ent = entries.map { |e| e[0] }
+        if request.request_method == verb
+          ent.map do |e|
+            !!(e =~ request.fullpath)
+          end
         end
       end
 
-      ret = rl[request.request_method].map { |p| !!(Regexp.new(p) =~ request.fullpath) }
-      ret = ret.include?(true)
-
-      ret
+      valid_routes.flatten.include?(true)
     end
 
     # A helper to only display a forbidden page if you address has not been
