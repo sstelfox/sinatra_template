@@ -72,7 +72,7 @@ class Default::App
       return false if logged_in?
 
       flash[:alert] = "You need to login before continuing."
-      session[:stored_path] = request.fullpath
+      session[:stored_path] = request.fullpath if routeable_path?(request.fullpath)
       redirect "/login"
     end
 
@@ -98,6 +98,25 @@ class Default::App
       else
         redirect "/"
       end
+    end
+
+    # Check to see whether or not the requested path is actually handled by
+    # Sinatra. This is used to prevent us from redirecting a user to something
+    # that isn't a sinatra route (such as a static asset or a 404 page)
+    #
+    # @param [String] path
+    # @return [Boolean]
+    def routeable_path?(path)
+      rl = self.class.routes.each_with_object(Hash.new([])) do |verb, route_listing|
+        verb[1].each do |route|
+          route_listing[verb[0]] += [route[0].source]
+        end
+      end
+
+      ret = rl[request.request_method].map { |p| !!(Regexp.new(p) =~ request.fullpath) }
+      ret = ret.include?(true)
+
+      ret
     end
 
     # A helper to only display a forbidden page if you address has not been
