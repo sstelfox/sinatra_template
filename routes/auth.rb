@@ -111,7 +111,7 @@ class Default::App
         ent = entries.map { |e| e[0] }
         if request.request_method == verb
           ent.map do |e|
-            !!(e =~ request.fullpath)
+            !!(e =~ path)
           end
         end
       end
