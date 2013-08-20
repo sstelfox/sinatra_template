@@ -1,7 +1,7 @@
 
 notification :off
 
-guard :process, name: 'DefaultAppServer', command: 'unicorn -c config/unicorn.rb' do
+guard :process, name: 'DefaultAppServer', command: 'thin -p 3000' do
   watch(%r{^config/(.+).rb$})
   watch(%r{^helpers/(.+)\.rb$})
   watch(%r{^lib/(.+)\.rb$})

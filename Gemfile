@@ -5,11 +5,7 @@ gem 'sinatra'
 gem 'sinatra-contrib'
 gem 'rack-flash3'
 
-gem 'compass'
-gem 'uglifier'
-gem 'therubyracer'
-
-gem 'unicorn'
+gem 'thin'
 
 gem 'datamapper'
 gem 'dm-sqlite-adapter'

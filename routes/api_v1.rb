@@ -9,12 +9,12 @@ class Default::App
 
     not_found do
       content_type :json
-      response_wrapper({}, response.status, [env['sinatra.error'].message])
+      response_wrapper { [{}, response.status, env['sinatra.error'].message] }
     end
 
     error do
       content_type :json
-      response_wrapper({}, response.status, [env['sinatra.error'].message])
+      response_wrapper { [{}, response.status, env['sinatra.error'].message] }
     end
   end
 end

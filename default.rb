@@ -12,8 +12,6 @@ require 'rack-flash'
 require 'lib/core_ext/hash'
 require 'lib/init_database'
 
-require 'lib/scss_engine'
-
 module Default
   class App < Sinatra::Base
     enable :logging, :sessions, :method_override
@@ -28,7 +26,6 @@ module Default
     end
 
     use Rack::Flash
-    use ScssEngine
 
     register Sinatra::Namespace
 
