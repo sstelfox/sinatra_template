@@ -10,5 +10,5 @@ guard :process, name: 'DefaultAppServer', command: 'thin start -p 3000' do
   
   watch('config.ru')
   watch('Gemfile.lock')
-  watch('nca.rb')
+  watch('default.rb')
 end
