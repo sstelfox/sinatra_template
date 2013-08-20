@@ -38,6 +38,7 @@ namespace :db do
   desc "Blow away the current database and start from scratch"
   task :reset => [:environment] do
     DataMapper.auto_migrate!
+    Rake::Task['db:seed'].execute
   end
 
   desc "Seed the database with initial required data"
