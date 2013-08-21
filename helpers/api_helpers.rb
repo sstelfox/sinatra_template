@@ -18,7 +18,7 @@ module ApiResponseHelper
       begin
         new_data, new_response_code, new_errors = yield
 
-        data.deep_merge!(new_data)
+        data.deep_merge!(new_data) if new_data
         errors = errors + Array(new_errors)
         response_code = new_response_code || response_code
       rescue Exception => e
