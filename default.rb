@@ -26,7 +26,6 @@ module Default
     end
 
     use Rack::Flash
-
     register Sinatra::Namespace
 
     # Available methods: OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
