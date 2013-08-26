@@ -24,7 +24,7 @@ task :routes => [:environment] do
 end
 
 desc "Run a console with the application loaded"
-task :console do
+task :console => [:environment] do
   require 'pry'
   pry
 end
