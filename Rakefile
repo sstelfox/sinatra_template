@@ -4,6 +4,11 @@ task "environment" do
   require './default'
 end
 
+desc "Run all the tests"
+task :test => [:environment] do
+  require 'spec/test_helper'
+end
+
 # This will print all of the configured routes for the sinatra application in
 # the order that the route was first specified. All of the methods will be
 # combined together and it will format the output into neat columns. Very useful
