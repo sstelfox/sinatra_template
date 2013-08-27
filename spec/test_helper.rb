@@ -3,6 +3,7 @@ ENV['RACK_ENV'] = 'test'
 
 require 'minitest/autorun'
 require 'rack/test'
+require 'sinatra/test_helpers'
 
 # The base for a test case, all minitest cases under this directory should sub
 # class this.
@@ -11,6 +12,12 @@ class TestCase < MiniTest::Unit::TestCase
 
   def app
     Default::App
+  end
+
+  def assert_redirect(destination)
+    env = last_request.env
+    uri = env['rack.url_scheme'] + '://' + env['SERVER_NAME'] + destination
+    assert_equal(uri, last_response.location)
   end
 end
 
