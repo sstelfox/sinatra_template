@@ -38,5 +38,19 @@ module ApiResponseHelper
     # Use halt to prevent all further processing
     halt(response_code, response.to_json)
   end
+
+  # This helper allows you to quickly extract data provided through the request
+  # body in JSON format and ensure that it is valid. In the event the user
+  # provides invalid JSON this will stop further processing of the request and
+  # return a 400 bad request status message.
+  #
+  # @return [Hash<String => String>] User provided data
+  def extract_json_body
+    JSON.parse(request.body.read)
+  rescue JSON::ParserError
+    response_wrapper do
+      [nil, 400, "You need to provide valid JSON."]
+    end
+  end
 end
 
