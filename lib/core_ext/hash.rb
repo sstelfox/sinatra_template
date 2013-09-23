@@ -12,7 +12,7 @@ class Hash
     raise ArgumentError unless other.is_a?(Hash)
 
     other.each do |k, v|
-      self[k] = (self[k].is_a?(Hash) && self[k].is_a?(Hash)) ? self[k].deep_merge(v) : v
+      self[k] = (self[k].is_a?(Hash) && other[k].is_a?(Hash)) ? self[k].deep_merge(v) : v
     end
 
     self
