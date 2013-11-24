@@ -12,13 +12,17 @@ class User
 
   timestamps :at
 
+  has n, :audit_logs
+
   validates_format_of     :username, with: /\w+/, message: "Only letters, numbers, and underscores are allowed in a username."
   validates_length_of     :username, min:  4,     message: "A username needs to be at least 4 characters long."
   validates_presence_of   :username,              message: "We need a username so you can get back in later!"
   validates_uniqueness_of :username,              message: "We already have an account with that username. Please pick another one."
 
   # Ensure our usernames are case consistent
-  before :save { |u| u.username.downcase! }
+  before :save do |u|
+    u.username.downcase!
+  end
 
   # Password/Password confirmation virtual attributes, used for collection what
   # will become the crypt_pass & salt combo.

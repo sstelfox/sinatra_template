@@ -11,7 +11,7 @@ require 'rack-flash'
 
 require 'lib/core_ext/hash'
 require 'lib/init_database'
-require 'lib/strong_parameters'
+#require 'lib/strong_parameters'
 
 module Default
   class App < Sinatra::Base
