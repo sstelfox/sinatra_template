@@ -1,0 +1,4 @@
+Style/RegexpLiteral:
+  AllowInnerSlashes: yes
+require:
+- rubocop-rspec
